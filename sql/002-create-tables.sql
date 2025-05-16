@@ -1,0 +1,23 @@
+CREATE TABLE areas (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE employees (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  identity_document VARCHAR(255) NOT NULL,
+  birth_date DATE NOT NULL,
+  is_developer BOOLEAN NOT NULL,
+  description TEXT,
+  area_id INT,
+  FOREIGN KEY (area_id) REFERENCES areas(id) ON DELETE CASCADE
+);
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL
+);
+
