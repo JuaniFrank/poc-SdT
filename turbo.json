@@ -11,6 +11,14 @@
       "start": {
         "persistent": true,
         "cache": false
+      },
+      "api:start": {
+        "persistent": true,
+        "cache": false
+      },
+      "client:start": {
+        "persistent": true,
+        "cache": false
       }
     }
   }
