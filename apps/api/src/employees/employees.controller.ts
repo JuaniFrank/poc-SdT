@@ -2,35 +2,36 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { EmployeesService } from './employees.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
+import { Employee } from './entities/employee.entity';
 
 @Controller('employees')
 export class EmployeesController {
   constructor(private readonly appService: EmployeesService) {}
 
   @Get()
-  findAll(): string {
-    return this.appService.findAll();
+  findAll(): Promise<Employee[]> {
+    return this.appService.findAllEmployees();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string): string {
-    return this.appService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOneEmployee(@Param('id') id: number): Promise<Employee> {
+  //   return this.appService.findOneEmployee(+id);
+  // }
 
   @Post()
-  create(@Body() createEmployeeDto: CreateEmployeeDto): string {
-    return this.appService.create(createEmployeeDto);
+  create(@Body() createEmployeeDto: CreateEmployeeDto): Promise<Employee> {
+    return this.appService.createEmployee(createEmployeeDto);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: number, @Body() updateEmployeeDto: UpdateEmployeeDto): string {
-    return this.appService.update(+id, updateEmployeeDto);
-  } 
+  // @Patch(':id')
+  // update(@Param('id') id: number, @Body() updateEmployeeDto: UpdateEmployeeDto): string {
+  //   return this.appService.updateEmployee(+id, updateEmployeeDto);
+  // } 
 
-  @Delete('/:id')
-  remove(@Param('id') id: string): string {
-    return this.appService.remove(+id);
-  }
+  // @Delete('/:id')
+  // remove(@Param('id') id: string): string {
+  //   return this.appService.removeEmployee(+id);
+  // }
 }
 
 
