@@ -7,3 +7,5 @@ services:
       - MYSQL_DATABASE=admin
     ports:
       - 3307:3306
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
