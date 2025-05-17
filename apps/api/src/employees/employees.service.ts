@@ -62,7 +62,12 @@ export class EmployeesService {
     return result;
   }
 
-  async removeEmployee(id: number) {
+  async softRemoveEmployee(id: number): Promise<QueryResult> {
+    const [result] = await this.db.execute(`UPDATE employees SET deleted = true WHERE id = ?`, [id]);
+    return result;
+  }
+
+  async removeEmployee(id: number): Promise<QueryResult> {
     const [result] = await this.db.execute(`DELETE FROM employees WHERE id = ?`, [id]);
     return result;
   }
