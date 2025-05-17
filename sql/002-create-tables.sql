@@ -6,7 +6,7 @@ CREATE TABLE areas (
 CREATE TABLE employees (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  lastName VARCHAR(255) NOT NULL,
+  lastname VARCHAR(255) NOT NULL,
   email VARCHAR(255),
   identity_document INT,
   birth_date DATE,
