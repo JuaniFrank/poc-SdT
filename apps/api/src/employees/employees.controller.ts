@@ -14,10 +14,10 @@ export class EmployeesController {
     return this.appService.findAllEmployees();
   }
 
-  // @Get(':id')
-  // findOneEmployee(@Param('id') id: number): Promise<Employee> {
-  //   return this.appService.findOneEmployee(+id);
-  // }
+  @Get(':id')
+  findOneEmployee(@Param('id') id: number): Promise<Employee> {
+    return this.appService.findOneEmployee(+id);
+  }
 
   @Post()
   create(@Body() createEmployeeDto: CreateEmployeeDto): Promise<QueryResult> {
