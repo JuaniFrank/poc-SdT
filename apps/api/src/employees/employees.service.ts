@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { Inject } from '@nestjs/common';
-import { Pool } from 'mysql2/promise';
+import { Pool, QueryResult } from 'mysql2/promise';
 import { Employee } from './entities/employee.entity';
 
 @Injectable()
@@ -17,13 +17,23 @@ export class EmployeesService {
     return rows as Employee[];
   }
 
-  async createEmployee(employee: CreateEmployeeDto) {
-    const [result] = await this.db.execute(
-      `INSERT INTO employees (name, lastName, email, identityDocument, birthDate, isDeveloper, description, areaId, deleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [employee.name, employee.lastName, employee.email, employee.identityDocument, employee.birthDate, employee.isDeveloper, employee.description, employee.areaId, employee.deleted],
-    ) as unknown as [Employee];
+  async createEmployee(employee: CreateEmployeeDto): Promise<QueryResult> {
+      const [result] = await this.db.execute(
+      `INSERT INTO employees (name, lastName, email, identity_document, birth_date, is_developer, description, area_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        employee.name,
+        employee.lastName ?? null,
+        employee.email ?? null,
+        employee.identityDocument ?? null,
+        employee.birthDate ?? null,
+        employee.isDeveloper ?? null,
+        employee.description ?? null,
+        employee.areaId ?? null,
+      ]
+    );
     return result;
   }
+  
 
   async findOneEmployee(id: number) {
     const [rows] = await this.db.query(`SELECT * FROM employees WHERE id = ?`, [id]);
