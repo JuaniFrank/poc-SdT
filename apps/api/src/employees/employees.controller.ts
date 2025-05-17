@@ -29,10 +29,15 @@ export class EmployeesController {
     return this.appService.updateEmployee(+id, updateEmployeeDto);
   } 
 
-  // @Delete('/:id')
-  // remove(@Param('id') id: string): string {
-  //   return this.appService.removeEmployee(+id);
-  // }
+  @Delete('/:id')
+  remove(@Param('id') id: string): Promise<QueryResult> {
+    return this.appService.removeEmployee(+id);
+  }
+
+  @Delete('/soft/:id')
+  softRemove(@Param('id') id: string): Promise<QueryResult> {
+    return this.appService.softRemoveEmployee(+id);
+  }
 }
 
 
