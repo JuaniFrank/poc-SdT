@@ -7,18 +7,18 @@ import { Employee } from './entities/employee.entity';
 
 @Injectable()
 export class EmployeesService {
-
+  
   constructor(
     @Inject('DATABASE_CONNECTION') private readonly db: Pool,
   ) {}
 
   async findAllEmployees(): Promise<Employee[]> {
-    const [rows] = await this.db.query(`SELECT * FROM employees`);
+    const [rows] = await this.db.execute(`SELECT * FROM employees`);
     return rows as Employee[];
   }
 
   async createEmployee(employee: CreateEmployeeDto): Promise<QueryResult> {
-      const [result] = await this.db.execute(
+    const [result] = await this.db.execute(
       `INSERT INTO employees (name, lastName, email, identity_document, birth_date, is_developer, description, area_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         employee.name,
@@ -34,15 +34,15 @@ export class EmployeesService {
     return result;
   }
 
-
-  async findOneEmployee(id: number): Promise<Employee> {
-    const [rows] = await this.db.query(`SELECT * FROM employees WHERE id = ?`, [id]);
-    return rows[0] as Employee;
+  async findOneEmployee(id: number): Promise<Employee | null> {
+    const [rows] = await this.db.execute(`SELECT * FROM employees WHERE id = ?`, [id]);
+    const employees = rows as Employee[];
+    return employees.length > 0 ? employees[0] : null;
   }
 
   async updateEmployee(id: number, updateEmployeeDto: UpdateEmployeeDto): Promise<QueryResult> {
     const fields: string[] = [];
-    const values: (string | number | boolean)[] = [];
+    const values: (string | number | boolean | null)[] = [];
   
     for (const [key, value] of Object.entries(updateEmployeeDto)) {
       if (value !== undefined) {
