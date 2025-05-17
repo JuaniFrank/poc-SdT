@@ -33,14 +33,14 @@ export class EmployeesService {
     );
     return result;
   }
-  
 
-  async findOneEmployee(id: number) {
+
+  async findOneEmployee(id: number): Promise<Employee> {
     const [rows] = await this.db.query(`SELECT * FROM employees WHERE id = ?`, [id]);
-    return rows;
+    return rows[0] as Employee;
   }
 
-  async updateEmployee(id: number, updateEmployeeDto: UpdateEmployeeDto) {
+  async updateEmployee(id: number, updateEmployeeDto: UpdateEmployeeDto): Promise<QueryResult> {
     const [result] = await this.db.execute(
       `UPDATE employees SET name = ?, lastName = ?, email = ?, identityDocument = ?, birthDate = ?, isDeveloper = ?, description = ?, areaId = ?, deleted = ? WHERE id = ?`,
       [updateEmployeeDto.name, updateEmployeeDto.lastName, updateEmployeeDto.email, updateEmployeeDto.identityDocument, updateEmployeeDto.birthDate, updateEmployeeDto.isDeveloper, updateEmployeeDto.description, updateEmployeeDto.areaId, updateEmployeeDto.deleted, id],
