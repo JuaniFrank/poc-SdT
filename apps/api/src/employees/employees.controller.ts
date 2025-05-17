@@ -7,36 +7,36 @@ import { QueryResult } from 'mysql2';
 
 @Controller('employees')
 export class EmployeesController {
-  constructor(private readonly appService: EmployeesService) {}
+  constructor(private readonly employeeService: EmployeesService) {}
 
   @Get()
   findAll(): Promise<Employee[]> {
-    return this.appService.findAllEmployees();
+    return this.employeeService.findAllEmployees();
   }
 
   @Get(':id')
-  findOneEmployee(@Param('id') id: number): Promise<Employee> {
-    return this.appService.findOneEmployee(+id);
+  findOneEmployee(@Param('id') id: number){
+    return this.employeeService.findOneEmployee(+id);
   }
 
   @Post()
   create(@Body() createEmployeeDto: CreateEmployeeDto): Promise<QueryResult> {
-    return this.appService.createEmployee(createEmployeeDto);
+    return this.employeeService.createEmployee(createEmployeeDto);
   }
 
   @Patch(':id')
   update(@Param('id') id: number, @Body() updateEmployeeDto: UpdateEmployeeDto): Promise<QueryResult> {
-    return this.appService.updateEmployee(+id, updateEmployeeDto);
+    return this.employeeService.updateEmployee(+id, updateEmployeeDto);
   } 
 
   @Delete('/:id')
   remove(@Param('id') id: string): Promise<QueryResult> {
-    return this.appService.removeEmployee(+id);
+    return this.employeeService.removeEmployee(+id);
   }
 
   @Delete('/soft/:id')
   softRemove(@Param('id') id: string): Promise<QueryResult> {
-    return this.appService.softRemoveEmployee(+id);
+    return this.employeeService.softRemoveEmployee(+id);
   }
 }
 
