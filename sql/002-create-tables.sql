@@ -8,7 +8,7 @@ CREATE TABLE employees (
   name VARCHAR(255) NOT NULL,
   lastName VARCHAR(255) NOT NULL,
   email VARCHAR(255),
-  identity_document VARCHAR(255),
+  identity_document INT,
   birth_date DATE,
   is_developer BOOLEAN,
   description TEXT,
