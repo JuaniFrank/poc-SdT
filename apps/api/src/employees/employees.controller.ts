@@ -3,6 +3,7 @@ import { EmployeesService } from './employees.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { Employee } from './entities/employee.entity';
+import { QueryResult } from 'mysql2';
 
 @Controller('employees')
 export class EmployeesController {
@@ -19,7 +20,7 @@ export class EmployeesController {
   // }
 
   @Post()
-  create(@Body() createEmployeeDto: CreateEmployeeDto): Promise<Employee> {
+  create(@Body() createEmployeeDto: CreateEmployeeDto): Promise<QueryResult> {
     return this.appService.createEmployee(createEmployeeDto);
   }
 
