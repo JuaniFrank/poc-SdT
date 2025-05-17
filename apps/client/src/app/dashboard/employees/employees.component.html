@@ -1,0 +1,13 @@
+<div class="container">
+    <h2>Dashboard - Empleados</h2>
+    <div *ngIf="loading()">Cargando...</div>
+    <div *ngIf="!loading() && employees().length === 0">No hay empleados disponibles</div>
+    <div class="employees-container" *ngIf="!loading() && employees().length > 0">
+      <div class="employee-card" *ngFor="let employee of employees()">
+        <h3>{{ employee.name }}</h3>
+        <p>Apellido: {{ employee.lastName }}</p>
+        <p>Email: {{ employee.email }}</p>
+      </div>
+    </div>
+  </div>
+  
