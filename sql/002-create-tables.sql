@@ -6,11 +6,16 @@ CREATE TABLE areas (
 CREATE TABLE employees (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  identity_document VARCHAR(255) NOT NULL,
-  birth_date DATE NOT NULL,
-  is_developer BOOLEAN NOT NULL,
+  lastname VARCHAR(255) NOT NULL,
+  email VARCHAR(255),
+  identity_document INT,
+  birth_date DATE,
+  is_developer BOOLEAN,
   description TEXT,
   area_id INT,
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  deleted BOOLEAN DEFAULT FALSE,
   FOREIGN KEY (area_id) REFERENCES areas(id) ON DELETE CASCADE
 );
 
@@ -20,4 +25,3 @@ CREATE TABLE users (
   password VARCHAR(255) NOT NULL,
   email VARCHAR(255) UNIQUE NOT NULL
 );
-
