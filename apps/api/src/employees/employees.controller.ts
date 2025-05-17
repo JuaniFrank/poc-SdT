@@ -24,10 +24,10 @@ export class EmployeesController {
     return this.appService.createEmployee(createEmployeeDto);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: number, @Body() updateEmployeeDto: UpdateEmployeeDto): string {
-  //   return this.appService.updateEmployee(+id, updateEmployeeDto);
-  // } 
+  @Patch(':id')
+  update(@Param('id') id: number, @Body() updateEmployeeDto: UpdateEmployeeDto): Promise<QueryResult> {
+    return this.appService.updateEmployee(+id, updateEmployeeDto);
+  } 
 
   // @Delete('/:id')
   // remove(@Param('id') id: string): string {
