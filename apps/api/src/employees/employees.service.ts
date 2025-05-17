@@ -41,10 +41,24 @@ export class EmployeesService {
   }
 
   async updateEmployee(id: number, updateEmployeeDto: UpdateEmployeeDto): Promise<QueryResult> {
-    const [result] = await this.db.execute(
-      `UPDATE employees SET name = ?, lastName = ?, email = ?, identityDocument = ?, birthDate = ?, isDeveloper = ?, description = ?, areaId = ?, deleted = ? WHERE id = ?`,
-      [updateEmployeeDto.name, updateEmployeeDto.lastName, updateEmployeeDto.email, updateEmployeeDto.identityDocument, updateEmployeeDto.birthDate, updateEmployeeDto.isDeveloper, updateEmployeeDto.description, updateEmployeeDto.areaId, updateEmployeeDto.deleted, id],
-    );
+    const fields: string[] = [];
+    const values: (string | number | boolean)[] = [];
+  
+    for (const [key, value] of Object.entries(updateEmployeeDto)) {
+      if (value !== undefined) {
+        fields.push(`${key} = ?`);
+        values.push(value);
+      }
+    }
+  
+    if (fields.length === 0) {
+      throw new Error("No fields provided for update");
+    }
+  
+    const sql = `UPDATE employees SET ${fields.join(", ")} WHERE id = ?`;
+    values.push(id);
+  
+    const [result] = await this.db.execute(sql, values);
     return result;
   }
 
