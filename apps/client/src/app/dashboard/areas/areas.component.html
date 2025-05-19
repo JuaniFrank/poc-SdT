@@ -1,0 +1,10 @@
+<h1 class="text-left text-3xl">Areas</h1>
+
+
+<ng-container *ngIf="loading()">
+  <p>Loading...</p>
+</ng-container>
+
+<ng-container *ngIf="!loading()">
+<app-area-table [areas]="areas()"/>
+</ng-container>

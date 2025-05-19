@@ -14,10 +14,9 @@ export const DASHBOARD_ROUTES: Routes = [
         loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent),
       },
       {
-        path: '',
-        redirectTo: 'employees',
-        pathMatch: 'full',
-      },
+        path: 'areas',
+        loadComponent: () => import('./areas/areas.component').then(m => m.AreasComponent),
+      }
     ],
   },
 ];

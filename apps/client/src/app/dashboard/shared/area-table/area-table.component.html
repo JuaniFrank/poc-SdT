@@ -1,0 +1,25 @@
+<p-table id="areas-table" [value]="areas" [tableStyle]="{ 'height': '100%' }" class="h-full">
+    <ng-template #header>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Color</th>
+            <th>Actions</th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-area class="overflow-visible">
+        <tr>
+            <td>{{ area.id }}</td>
+            <td>{{ area.title }}</td>
+            <td>{{ area.color }}</td>
+            <td>
+                <p-colorpicker [(ngModel)]="area.color" (onChange)="onColorChange(area)" format="hex"></p-colorpicker>
+            </td>
+            <td class="flex gap-2 items-center">
+                <p-button class="w-12" icon="pi pi-pencil" severity="primary">Edit</p-button>
+                <p-button class="w-12" icon="pi pi-trash" severity="danger">Delete</p-button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table> 
