@@ -53,9 +53,7 @@ La base de datos utiliza MySQL y consta de las siguientes tablas:
 ### Tabla `areas`
 
 ```sql
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR(255) NOT NULL,
-  color VARCHAR(255) NOT NULLCREATE TABLE areas (
+CREATE TABLE areas (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   color VARCHAR(255) NOT NULL
@@ -145,6 +143,8 @@ turbo run api:start
 
 #### API Endpoints
 
+Puedes ver todos los endpoints en http://localhost:3000/api - WIP
+
 ### Áreas
 
 - GET `/areas` - Obtener todas las áreas
@@ -161,7 +161,7 @@ turbo run api:start
 
 ### Frontend
 
-- `AreaTableComponent`: Tabla de áreas con color picker - WIP 
+- `AreaTableComponent`: Tabla de áreas con color picker - WIP
 - `EmployeesComponent`: Gestión de empleados
 - `DashboardComponent`: Vista principal
 
