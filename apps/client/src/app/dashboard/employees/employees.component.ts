@@ -2,12 +2,15 @@ import { Component, OnInit, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Employee } from '@app/models/employee.model';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
+import { Employee } from 'src/app/models/employee.model';
+
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, CardModule, ButtonModule],
   templateUrl: './employees.component.html',
   styleUrl: './employees.component.css'
 })
