@@ -1,13 +1,23 @@
 <div class="container">
-    <h2>Dashboard - Empleados</h2>
+    <h1 class="text-2xl font-bold mb-8" >Lista de Empleados</h1>
+
     <div *ngIf="loading()">Cargando...</div>
     <div *ngIf="!loading() && employees().length === 0">No hay empleados disponibles</div>
+    
     <div class="employees-container" *ngIf="!loading() && employees().length > 0">
-      <div class="employee-card" *ngFor="let employee of employees()">
-        <h3>{{ employee.name }}</h3>
-        <p>Apellido: {{ employee.lastName }}</p>
-        <p>Email: {{ employee.email }}</p>
-      </div>
+      <p-card [style]="{ width: '100%', overflow: 'hidden' }" *ngFor="let employee of employees()" [header]="employee.name">
+        <!-- <ng-template #header>
+            <img alt="Card" class="w-full" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+        </ng-template> -->
+        <ng-template #title>{{ employee.name + ' ' + employee.lastName }}</ng-template>
+        <ng-template #subtitle>{{ employee.email }}</ng-template>
+        <ng-template #footer>
+            <div class="flex gap-4 mt-1">
+                <p-button label="Edit" severity="primary" class="w-full" [outlined]="true" styleClass="w-full" />
+                <p-button label="Delete" severity="danger" class="w-full" styleClass="w-full" />
+            </div>
+        </ng-template>
+    </p-card>
     </div>
   </div>
   
