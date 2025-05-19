@@ -56,9 +56,6 @@ La base de datos utiliza MySQL y consta de las siguientes tablas:
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   color VARCHAR(255) NOT NULLCREATE TABLE areas (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR(255) NOT NULL,
-  color VARCHAR(255) NOT NULL
 );
 ```
 
@@ -144,6 +141,8 @@ turbo run api:start
 ```
 
 #### API Endpoints
+
+Puedes ver todos los endpoints en http://localhost:3000/api - WIP 
 
 ### Áreas
 
