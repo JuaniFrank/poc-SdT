@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Area } from 'src/app/models/area.model';
+import { AreaQ } from 'src/app/models/area.model';
 
 
 @Injectable({
@@ -38,7 +39,7 @@ export class AreaServiceTsService {
   getAreasWithQuantitys(): Observable<Area[]> {
     return this.http.get<any[]>(`${this.baseUrl}/quantity`).pipe(
       map((response: any[]) => {
-        return response.map(area => new Area({
+        return response.map(area => new AreaQ({
           id: area.id,
           title: area.title,
           color: area.color,
