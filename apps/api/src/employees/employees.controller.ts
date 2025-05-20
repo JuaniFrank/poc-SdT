@@ -36,7 +36,7 @@ export class EmployeesController {
     return this.employeeService.createEmployee(createEmployeeDto);
   }
 
-  @Patch('/update/:id')
+  @Patch('/edit/:id')
   update(@Param('id') id: number, @Body() updateEmployeeDto: UpdateEmployeeDto): Promise<QueryResult> {
     return this.employeeService.updateEmployee(+id, updateEmployeeDto);
   } 

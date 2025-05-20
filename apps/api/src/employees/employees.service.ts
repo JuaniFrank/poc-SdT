@@ -34,11 +34,11 @@ export class EmployeesService {
         employee.name,
         employee.lastName ?? null,
         employee.email ?? null,
-        employee.identityDocument ?? null,
-        employee.birthDate ?? null,
-        employee.isDeveloper ?? null,
+        employee.identity_document ?? null,
+        employee.birth_date ?? null,
+        employee.is_developer ?? null,
         employee.description ?? null,
-        employee.areaId ?? null,
+        employee.area_id ?? null,
       ]
     );
     return result;
