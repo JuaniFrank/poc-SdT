@@ -1,0 +1,85 @@
+<div class="p-4 flex flex-col gap-4 max-h-[calc(100vh-10rem)] overflow-scroll">
+    <form [formGroup]="employeeForm" (ngSubmit)="addEmployee(employeeForm.value)" class="flex flex-col gap-4">
+        <div class="flex flex-col gap-2">
+            <label class="text-lg font-semibold" for="name">Name</label>
+            <input class="pl-2 py-2 border border-gray-300 rounded" type="text" id="name" formControlName="name" placeholder="Enter name">
+            <p-message severity="error" icon="pi pi-times-circle" [style]="{ 'margin-top': '0.5rem' }" *ngIf="employeeForm.get('name')?.invalid && employeeForm.get('name')?.touched">
+                Name is required and must be at least 3 characters long
+            </p-message>
+        </div>
+        <div class="flex flex-col gap-2">
+            <label class="text-lg font-semibold" for="lastname">Lastname</label>
+            <input class="pl-2 py-2 border border-gray-300 rounded" type="text" id="lastname" formControlName="lastname" placeholder="Enter lastname">
+            <p-message severity="error" icon="pi pi-times-circle" [style]="{ 'margin-top': '0.5rem' }" *ngIf="employeeForm.get('lastname')?.invalid && employeeForm.get('lastname')?.touched">
+                Lastname is required and must be at least 3 characters long
+            </p-message>
+        </div>
+        <div class="flex flex-col gap-2">
+            <label class="text-lg font-semibold" for="email">Email</label>
+            <input class="pl-2 py-2 border border-gray-300 rounded" type="email" id="email" formControlName="email" placeholder="Enter email">
+            <p-message severity="error" icon="pi pi-times-circle" [style]="{ 'margin-top': '0.5rem' }" *ngIf="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched">
+                Email is required and must be a valid email address
+            </p-message>
+        </div>
+        <div class="flex flex-col gap-2">
+            <label class="text-lg font-semibold" for="identity_document">Identity Document</label>
+            <input class="pl-2 py-2 border border-gray-300 rounded" type="number" id="identity_document" formControlName="identity_document" placeholder="Enter identity document">
+            <p-message severity="error" icon="pi pi-times-circle" [style]="{ 'margin-top': '0.5rem' }" *ngIf="employeeForm.get('identity_document')?.invalid && employeeForm.get('identity_document')?.touched">
+                Identity document is required and must be a valid number
+            </p-message>
+        </div>
+        <div class="flex flex-col gap-2">
+            <label class="text-lg font-semibold" for="birth_date">Birth Date</label>
+            <input class="pl-2 py-2 border border-gray-300 rounded" type="date" id="birth_date" formControlName="birth_date" placeholder="Enter birth date">
+            <p-message severity="error" icon="pi pi-times-circle" [style]="{ 'margin-top': '0.5rem' }" *ngIf="employeeForm.get('birth_date')?.invalid && employeeForm.get('birth_date')?.touched">
+                Birth date is required and must be a valid date
+            </p-message>
+        </div>
+        <div class="flex flex-col gap-2">
+            <label class="text-lg font-semibold" for="is_developer">Is Developer</label>
+            <input class="pl-2 py-2 border border-gray-300 rounded" type="number" id="is_developer" formControlName="is_developer" placeholder="Enter is developer">
+            <p-message severity="error" icon="pi pi-times-circle" [style]="{ 'margin-top': '0.5rem' }" *ngIf="employeeForm.get('is_developer')?.invalid && employeeForm.get('is_developer')?.touched">
+                Is developer is required and must be a valid number
+            </p-message>
+        </div>
+        <div class="flex flex-col gap-2">
+            <label class="text-lg font-semibold" for="description">Description</label>
+            <input class="pl-2 py-2 border border-gray-300 rounded" type="text" id="description" formControlName="description" placeholder="Enter description">
+            <p-message severity="error" icon="pi pi-times-circle" [style]="{ 'margin-top': '0.5rem' }" *ngIf="employeeForm.get('description')?.invalid && employeeForm.get('description')?.touched">
+                Description is required and must be at least 3 characters long
+            </p-message>
+        </div>
+        <div class="flex flex-col gap-2">
+            <label class="text-lg font-semibold" for="area_id">Area</label>
+            <p-dropdown 
+            [style]="{display:'flex'}"
+            [options]="areas()"
+            formControlName="area_id"
+            optionLabel="title"
+            placeholder="Select an area"
+            ></p-dropdown>
+            <p-message severity="error" icon="pi pi-times-circle" [style]="{ 'margin-top': '0.5rem' }" *ngIf="employeeForm.get('area_id')?.invalid && employeeForm.get('area_id')?.touched">
+                Area is required
+            </p-message>
+        </div>
+        <div class="flex flex-col gap-2">
+            <label class="text-lg font-semibold" for="phone">Phone</label>
+            <input class="pl-2 py-2 border border-gray-300 rounded" type="number" id="phone" formControlName="phone" placeholder="Enter phone">
+            <p-message severity="error" icon="pi pi-times-circle" [style]="{ 'margin-top': '0.5rem' }" *ngIf="employeeForm.get('phone')?.invalid && employeeForm.get('phone')?.touched">
+                Phone is required and must be a valid number
+            </p-message>
+        </div>
+        <div class="flex flex-col gap-2">
+            <label class="text-lg font-semibold" for="address">Address</label>
+            <input class="pl-2 py-2 border border-gray-300 rounded" type="text" id="address" formControlName="address" placeholder="Enter address">
+            <p-message severity="error" icon="pi pi-times-circle" [style]="{ 'margin-top': '0.5rem' }" *ngIf="employeeForm.get('address')?.invalid && employeeForm.get('address')?.touched">
+                Address is required and must be at least 3 characters long
+            </p-message>
+        </div>
+        <div class="flex justify-end gap-2">
+            <button pButton label="Cancel" severity="secondary" (click)="close()"></button>
+            <button pButton label="Save" severity="primary" [disabled]="employeeForm.invalid" type="submit"></button>
+        </div>
+    </form>
+</div>
+
