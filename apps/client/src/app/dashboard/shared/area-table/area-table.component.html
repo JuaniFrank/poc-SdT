@@ -1,24 +1,34 @@
 <p-table id="areas-table" [value]="areas" [tableStyle]="{ 'height': '100%' }" class="h-full">
     <ng-template #header>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Color</th>
-            <th>Actions</th>
+        <tr class="text-center">
+            <th class="w-1/12 text-center">Id</th>
+            <th class="w-2/3 text-center">Name</th>
+            <th class="w-1/12 text-center">Quantity</th>
+            <th class="w-1/12 text-center">Color</th>
+            <th class="w-1/6 text-center ">Actions</th>
         </tr>
     </ng-template>
     <ng-template #body let-area class="overflow-visible">
         <tr>
-            <td>{{ area.id }}</td>
-            <td>{{ area.title }}</td>
-            <td>{{ area.color }}</td>
-            <td>
-                <p-colorpicker [(ngModel)]="area.color" (onChange)="onColorChange(area)" format="hex"></p-colorpicker>
+            <td class="text-center">{{ area.id }}</td>
+            <td class="text-center">
+                <label *ngIf="!editing() || id() !== area.id">{{ area.title }}</label>
+                <input type="text" [ngModel]="area.title" (ngModelChange)="area.title = $event" *ngIf="editing() && id() === area.id">
             </td>
-            <td class="flex gap-2 items-center">
-                <p-button class="w-12" icon="pi pi-pencil" severity="primary">Edit</p-button>
-                <p-button class="w-12" icon="pi pi-trash" severity="danger">Delete</p-button>
+
+            <td class="text-center">{{ area.quantity }}</td>
+            <td class="text-center">
+                <p-colorpicker [(ngModel)]="area.color" format="hex" (ngModelChange)="area.color = $event" [disabled]="!editing() || id() !== area.id"></p-colorpicker>
+            </td>
+            <td class="flex gap-2 items-center self-end justify-center">
+                <ng-container *ngIf="!editing() || id() !== area.id">
+                    <button pButton (click)="setEditing(true, area.id)" severity="success">Edit</button>
+                    <button pButton (click)="deleteArea(area)" severity="danger">Delete</button>
+                </ng-container>
+                <ng-container *ngIf="editing() && id() === area.id">
+                    <button pButton (click)="setEditing(false, area.id)" severity="danger">Cancel</button>
+                    <button pButton (click)="editArea(area)" severity="primary">Save</button>
+                </ng-container>
             </td>
         </tr>
     </ng-template>
