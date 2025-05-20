@@ -1,5 +1,5 @@
 import { Component, OnInit, signal, computed, inject, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CardModule } from 'primeng/card';
@@ -17,7 +17,6 @@ import { FormsModule } from '@angular/forms';
 import { EditEmployeeComponent } from '../shared/edit-employee/edit-employee.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
-
 
 @Component({
   selector: 'app-employees',
@@ -127,8 +126,8 @@ export class EmployeesComponent implements OnInit {
     this.fetchEmployees();
   }
 
-    show() {
-      const header = 'New Employee';
+    show(employee?: Employee) {
+      const header = employee ? 'Edit Employee' : 'New Employee';
   
       this.ref = this.dialogService.open(EditEmployeeComponent, {
         header,
@@ -136,6 +135,7 @@ export class EmployeesComponent implements OnInit {
         contentStyle: { overflow: 'auto' },
         baseZIndex: 10000,
         maximizable: true,
+        data: employee
       });
   
       this.ref.onClose.subscribe((result: any) => {
