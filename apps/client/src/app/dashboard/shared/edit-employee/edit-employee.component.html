@@ -1,0 +1,83 @@
+<div class="p-4 flex flex-col gap-4 max-h-[calc(100vh-10rem)] overflow-scroll">
+    <form [formGroup]="employeeForm" (ngSubmit)="updateEmployee(employeeForm.value)" class="flex flex-col gap-4">
+        <div class="flex flex-col gap-2">
+            <label class="text-lg font-semibold" for="name">Name</label>
+            <input class="pl-2 py-2 border border-gray-300 rounded" type="text" id="name" formControlName="name" placeholder="Enter name">
+            @if(employeeForm.get('name')?.invalid && employeeForm.get('name')?.touched){
+                <p-message severity="error" variant="simple" size="small">
+                    Name is required and must be at least 3 characters long
+                </p-message>
+            }
+        </div>
+        <div class="flex flex-col gap-2">
+            <label class="text-lg font-semibold" for="lastname">Lastname</label>
+            <input class="pl-2 py-2 border border-gray-300 rounded" type="text" id="lastname" formControlName="lastname" placeholder="Enter lastname">
+            @if(employeeForm.get('lastname')?.invalid && employeeForm.get('lastname')?.touched){
+                <p-message severity="error" variant="simple" size="small">
+                    Lastname is required and must be at least 3 characters long
+                </p-message>
+            }
+        </div>
+        <div class="flex flex-col gap-2">
+            <label class="text-lg font-semibold" for="area_id">Area</label>
+            <p-dropdown 
+            [style]="{display:'flex'}"
+            [options]="areas()"
+            formControlName="area_id"
+            optionLabel="title"
+            placeholder="Select an area"
+            ></p-dropdown>
+            @if(employeeForm.get('area_id')?.invalid && employeeForm.get('area_id')?.touched){
+                <p-message severity="error" variant="simple" size="small">
+                    Area is required
+                </p-message>
+            }
+        </div>
+        <div class="flex flex-col gap-2">
+            <label class="text-lg font-semibold" for="identity_document">Identity Document</label>
+            <input class="pl-2 py-2 border border-gray-300 rounded" type="number" id="identity_document" formControlName="identity_document" placeholder="Enter identity document">
+            @if(employeeForm.get('identity_document')?.invalid && employeeForm.get('identity_document')?.touched){
+                <p-message severity="error" variant="simple" size="small">
+                    Identity document is required and must be a valid number
+                </p-message>
+            }
+        </div>
+        <div class="flex flex-col gap-2">
+            <label class="text-lg font-semibold" for="birth_date">Birth Date</label>
+            <p-datepicker
+            formControlName="birth_date" 
+            dateFormat="dd/mm/yy" 
+            showIcon="true"
+            />
+            @if(employeeForm.get('birth_date')?.invalid && employeeForm.get('birth_date')?.touched){
+                <p-message severity="error" variant="simple" size="small">
+                    Birth date is required and must be a valid date
+                </p-message>
+            }
+        </div>
+        <div class="flex flex-col gap-2">
+            <label class="text-lg font-semibold" for="is_developer">Is Developer</label>
+            <p-toggleSwitch formControlName="is_developer"></p-toggleSwitch>
+            @if(employeeForm.get('is_developer')?.invalid && employeeForm.get('is_developer')?.touched){
+                <p-message severity="error" variant="simple" size="small">
+                    Is developer is required
+                </p-message>
+            }
+        </div>
+        <div class="flex flex-col gap-2">
+            <label class="text-lg font-semibold" for="description">Description</label>
+            <input class="pl-2 py-2 border border-gray-300 rounded" type="text" id="description" formControlName="description" placeholder="Enter description">
+            @if(employeeForm.get('description')?.invalid && employeeForm.get('description')?.touched){
+                <p-message severity="error" variant="simple" size="small">
+                    Description is required and must be at least 3 characters long
+                </p-message>
+            }
+        </div>  
+
+        <div class="flex justify-end gap-2">
+            <button pButton label="Cancel" severity="secondary" (click)="close()"></button>
+            <button pButton label="Save" severity="primary" [disabled]="employeeForm.invalid" type="submit"></button>
+        </div>
+    </form>
+</div>
+

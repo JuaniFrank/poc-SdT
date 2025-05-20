@@ -2,6 +2,8 @@
 @import "tailwindcss";
 @import "tailwindcss";
 @plugin "tailwindcss-primeui";
+@import "primeicons/primeicons.css";
+
 
 .p-datatable-table-container{
     overflow: visible !important;

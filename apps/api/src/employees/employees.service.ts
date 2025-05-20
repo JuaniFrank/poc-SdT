@@ -17,6 +17,16 @@ export class EmployeesService {
     return rows as Employee[];
   }
 
+  async findAllEmployeesActive(): Promise<Employee[]> {
+    const [rows] = await this.db.execute(`SELECT * FROM employees WHERE deleted = ?`, [false]);
+    return rows as Employee[];
+  }
+
+  async findAllEmployeesDeleted(): Promise<Employee[]> {
+    const [rows] = await this.db.execute(`SELECT * FROM employees WHERE deleted = ?`, [true]);
+    return rows as Employee[];
+  }
+
   async createEmployee(employee: CreateEmployeeDto): Promise<QueryResult> {
     const [result] = await this.db.execute(
       `INSERT INTO employees (name, lastName, email, identity_document, birth_date, is_developer, description, area_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
@@ -24,11 +34,11 @@ export class EmployeesService {
         employee.name,
         employee.lastName ?? null,
         employee.email ?? null,
-        employee.identityDocument ?? null,
-        employee.birthDate ?? null,
-        employee.isDeveloper ?? null,
+        employee.identity_document ?? null,
+        employee.birth_date ?? null,
+        employee.is_developer ?? null,
         employee.description ?? null,
-        employee.areaId ?? null,
+        employee.area_id ?? null,
       ]
     );
     return result;

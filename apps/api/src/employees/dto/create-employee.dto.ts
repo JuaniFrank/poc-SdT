@@ -2,10 +2,10 @@ export class CreateEmployeeDto {
     name: string;
     lastName?: string;
     email?: string;
-    identityDocument?: number;
-    birthDate?: Date;
-    isDeveloper?: boolean;
+    identity_document?: number;
+    birth_date?: Date;
+    is_developer?: boolean;
     description?: string;
-    areaId?: string;
+    area_id?: string;
     deleted?: boolean;
 }

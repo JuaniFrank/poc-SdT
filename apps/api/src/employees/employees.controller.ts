@@ -14,22 +14,34 @@ export class EmployeesController {
     return this.employeeService.findAllEmployees();
   }
 
-  @Get(':id')
+  @Get('status/:status')
+  findAllByStatus(@Param('status') status: 'active' | 'deleted'): Promise<Employee[]> {
+    if (status === 'active') {
+      return this.employeeService.findAllEmployeesActive();
+    } else if (status === 'deleted') {
+
+      return this.employeeService.findAllEmployeesDeleted();
+    } else {
+      return this.employeeService.findAllEmployees();
+    }
+  }
+
+  @Get('id/:id')
   findOneEmployee(@Param('id') id: number){
     return this.employeeService.findOneEmployee(+id);
   }
 
-  @Post()
+  @Post('/create')
   create(@Body() createEmployeeDto: CreateEmployeeDto): Promise<QueryResult> {
     return this.employeeService.createEmployee(createEmployeeDto);
   }
 
-  @Patch(':id')
+  @Patch('/edit/:id')
   update(@Param('id') id: number, @Body() updateEmployeeDto: UpdateEmployeeDto): Promise<QueryResult> {
     return this.employeeService.updateEmployee(+id, updateEmployeeDto);
   } 
 
-  @Delete('/:id')
+  @Delete('/hard/:id')
   remove(@Param('id') id: string): Promise<QueryResult> {
     return this.employeeService.removeEmployee(+id);
   }
