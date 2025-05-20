@@ -1,18 +1,14 @@
-export class Employee {
-    id!: string;
-    name!: string;
-    lastName!: string;
-    email!: string;
-    identityDocument!: string;
-    birthDate!: Date;
-    isDeveloper!: boolean;
-    description!: string;
-    areaId!: string;
-    createdAt!: Date;
-    updatedAt!: Date;
-    deleted!: boolean;
-
-    constructor(data: Partial<Employee> = {}) {
-        Object.assign(this, data);
-    }
+export interface Employee {
+    id: number;
+    name: string;
+    lastname: string;
+    email: string;
+    identity_document: number;
+    birth_date: string;
+    is_developer: number;
+    description: string;
+    area_id: number;
+    createdAt: string;
+    updatedAt: string;
+    deleted: number;
 }
