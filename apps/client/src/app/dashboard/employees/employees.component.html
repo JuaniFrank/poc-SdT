@@ -1,26 +1,50 @@
 <div class="container">
-    <h1 class="text-2xl font-bold mb-8" >Lista de Empleados</h1>
+    <div class="flex justify-between mb-4">
+      <h1 class="text-2xl font-bold">Lista de Empleados</h1>
+      <p-dropdown 
 
+        [options]="statusOptions"
+        [(ngModel)]="selectedStatus"
+        (onChange)="onStatusChange()"
+        placeholder="Filtrar por estado"
+        class="w-40 h-8 items-center"
+      >
+        <ng-template pTemplate="option" let-option>
+          <div class="flex align-items-center">
+            <span>{{ option.label }}</span>
+          </div>
+        </ng-template>
+      </p-dropdown>
+    </div>
+  
     <div *ngIf="loading()">Cargando...</div>
     <div *ngIf="!loading() && employees().length === 0">No hay empleados disponibles</div>
     
     <div class="employees-container" *ngIf="!loading() && employees().length > 0">
       <p-card [style]="{ width: '100%', overflow: 'hidden' }" *ngFor="let employee of employees()" [header]="getArea(employee.area_id).title">
-        <!-- <ng-template #header>
-            <img alt="Card" class="w-full" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
-        </ng-template> -->
         <ng-template #title>{{ employee.name + ' ' + employee.lastname }}</ng-template>
         <ng-template #subtitle>{{ employee.email }}</ng-template>
-
         <app-area-pill class="flex" [title]="getArea(employee.area_id).title" [color]="getArea(employee.area_id).color"></app-area-pill>
         
         <ng-template #footer>
-            <div class="flex gap-4 mt-1">
-                <p-button label="Edit" severity="primary" class="w-full" [outlined]="true" styleClass="w-full" />
-                <p-button label="Delete" severity="danger" class="w-full" styleClass="w-full" />
-            </div>
+          <div class="flex gap-4 mt-1">
+            <p-button 
+              label="Edit" 
+              severity="primary" 
+              class="w-full" 
+              [outlined]="true" 
+              styleClass="w-full" 
+              (onClick)="show()"
+            />
+            <p-button 
+              label="Delete" 
+              severity="danger" 
+              class="w-full" 
+              styleClass="w-full" 
+              (onClick)="deleteEmployee(employee.id, 'soft')"
+            />
+          </div>
         </ng-template>
-    </p-card>
+      </p-card>
     </div>
   </div>
-  
