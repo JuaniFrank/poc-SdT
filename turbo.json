@@ -8,6 +8,10 @@
       "check-types": {
         "dependsOn": ["^check-types"]
       },
+      "start:prod": {
+        "persistent": true,
+        "cache": false
+      },
       "start": {
         "persistent": true,
         "cache": false
@@ -18,9 +22,6 @@
       },
       "client:start": {
         "persistent": true,
-        "cache": false
-      },
-      "client:build": {
         "cache": false
       }
     }
