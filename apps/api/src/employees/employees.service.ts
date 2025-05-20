@@ -17,6 +17,16 @@ export class EmployeesService {
     return rows as Employee[];
   }
 
+  async findAllEmployeesActive(): Promise<Employee[]> {
+    const [rows] = await this.db.execute(`SELECT * FROM employees WHERE deleted = ?`, [false]);
+    return rows as Employee[];
+  }
+
+  async findAllEmployeesDeleted(): Promise<Employee[]> {
+    const [rows] = await this.db.execute(`SELECT * FROM employees WHERE deleted = ?`, [true]);
+    return rows as Employee[];
+  }
+
   async createEmployee(employee: CreateEmployeeDto): Promise<QueryResult> {
     const [result] = await this.db.execute(
       `INSERT INTO employees (name, lastName, email, identity_document, birth_date, is_developer, description, area_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
