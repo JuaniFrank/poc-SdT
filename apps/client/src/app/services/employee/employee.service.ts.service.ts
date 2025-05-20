@@ -21,11 +21,11 @@ export class EmployeeServiceTsService {
   }
 
   getById(id: number): Observable<Employee> {
-    return this.http.get<Employee>(`${this.baseUrl}/${id}`);
+    return this.http.get<Employee>(`${this.baseUrl}/id/${id}`);
   }
 
   update(id: number, data: Partial<Employee>): Observable<Employee> {
-    return this.http.patch<Employee>(`${this.baseUrl}/${id}`, data);
+    return this.http.patch<Employee>(`${this.baseUrl}/edit/${id}`, data);
   }
 
   deleteSoft(id: number): Observable<void> {
@@ -33,10 +33,10 @@ export class EmployeeServiceTsService {
   }
 
   deleteHard(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/hard/${id}`);
   }
 
   create(data: Partial<Employee>): Observable<Employee> {
-    return this.http.post<Employee>(this.baseUrl, data);
+    return this.http.post<Employee>(`${this.baseUrl}/create`, data);
   }
 }
