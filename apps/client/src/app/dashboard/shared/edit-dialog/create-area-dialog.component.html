@@ -1,0 +1,22 @@
+    <div id="aaaaaaaaaaa" class="p-4 flex flex-col gap-4 overflow-visible">
+        <form [formGroup]="areaForm" (ngSubmit)="addArea(areaForm.value)" class="flex flex-col gap-4">
+            <div class="flex flex-col gap-2">
+                <label class="text-lg font-semibold" for="title">Title</label>
+                <input class="pl-2 py-2 border border-gray-300 rounded" type="text" id="title" formControlName="title" placeholder="Enter title">
+                <p-message severity="error" icon="pi pi-times-circle" [style]="{ 'margin-top': '0.5rem' }" *ngIf="areaForm.get('title')?.invalid && areaForm.get('title')?.touched">
+                    Title is required and must be at least 3 characters long
+                </p-message>
+            </div>
+            <div class="flex flex-col gap-2">
+                <label class="text-lg font-semibold" for="color">Color</label>
+                <p-colorpicker formControlName="color" format="hex" [style]="{ width: '100%' }"></p-colorpicker>
+                <p-message severity="error" variant="simple" size="small" *ngIf="areaForm.get('color')?.invalid && areaForm.get('color')?.touched">
+                    Please select a color
+                </p-message>
+            </div>
+            <div class="flex justify-end gap-2">
+                <button pButton label="Cancel" severity="secondary" (click)="close()"></button>
+                <button pButton label="Save" severity="primary" [disabled]="areaForm.invalid" type="submit"></button>
+            </div>
+        </form>
+    </div>
