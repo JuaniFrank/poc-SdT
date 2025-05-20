@@ -16,6 +16,7 @@ import { createPool, Pool } from 'mysql2/promise';
           waitForConnections: true,
           connectionLimit: 10,
           queueLimit: 0,
+          namedPlaceholders: true,
         });
       },
     },
