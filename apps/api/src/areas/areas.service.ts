@@ -10,10 +10,10 @@ export class AreasService {
   constructor(@Inject('DATABASE_CONNECTION') private db: Pool) {}
 
   async create(createAreaDto: CreateAreaDto) {
-    const { title } = createAreaDto;
+    const { title, color } = createAreaDto;
     const [result] = await this.db.execute(
-      'INSERT INTO areas (title) VALUES (?)',
-      [title],
+      'INSERT INTO areas (title, color) VALUES (?, ?)',
+      [title, color],
     );
     return result;
   }
@@ -29,16 +29,48 @@ export class AreasService {
   }
 
   async update(id: number, updateAreaDto: UpdateAreaDto) {
-    const { title } = updateAreaDto;
-    const [result] = await this.db.execute(
-      'UPDATE areas SET title = ? WHERE id = ?',
-      [title, id],
-    );
+    const fields = [];
+    const values = [];
+  
+    if (updateAreaDto.title !== undefined) {
+      fields.push('title = ?');
+      values.push(updateAreaDto.title);
+    }
+  
+    if (updateAreaDto.color !== undefined) {
+      fields.push('color = ?');
+      values.push(updateAreaDto.color);
+    }
+  
+    if (fields.length === 0) {
+      throw new Error('No fields to update');
+    }
+  
+    values.push(id);
+    const query = `UPDATE areas SET ${fields.join(', ')} WHERE id = ?`;
+  
+    const [result] = await this.db.execute(query, values);
     return result;
   }
+  
+  
 
   async remove(id: number) {
     const [result] = await this.db.execute('DELETE FROM areas WHERE id = ?', [id]);
     return result;
+  }
+
+  async getAreasWithQuantitys() {
+    const [rows] = await this.db.query(`
+      SELECT 
+        a.id,
+        a.title,
+        a.color,
+        COUNT(e.id) AS quantity
+      FROM areas a
+      LEFT JOIN employees e ON a.id = e.area_id
+      GROUP BY a.id, a.title, a.color
+    `);
+    return rows;
   }
 }

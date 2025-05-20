@@ -12,6 +12,11 @@ export class AreasController {
     return this.areasService.create(createAreaDto);
   }
 
+  @Get('quantity')
+  getAreasWithQuantitys() {
+    return this.areasService.getAreasWithQuantitys();
+  }
+
   @Get()
   findAll() {
     return this.areasService.findAll();
@@ -32,3 +37,4 @@ export class AreasController {
     return this.areasService.remove(+id);
   }
 }
+

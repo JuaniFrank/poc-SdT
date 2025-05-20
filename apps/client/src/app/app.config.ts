@@ -9,6 +9,8 @@ import { importProvidersFrom } from '@angular/core';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { MessageService } from 'primeng/api';
 
 
 export const appConfig: ApplicationConfig = {
@@ -27,5 +29,10 @@ export const appConfig: ApplicationConfig = {
       },
     }),
     provideAnimationsAsync(),
+    importProvidersFrom(
+      DynamicDialogModule
+    ),
+    { provide: DialogService, useClass: DialogService },
+    { provide: MessageService, useClass: MessageService }
   ]
 };

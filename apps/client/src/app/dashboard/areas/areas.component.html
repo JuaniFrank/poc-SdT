@@ -1,10 +1,27 @@
-<h1 class="text-left text-3xl">Areas</h1>
+<div class="p-8">
 
+  <h1 class="text-left text-3xl">Areas</h1>
+  
+  
+  <ng-container *ngIf="loading()">
+    <p>Loading...</p>
+  </ng-container>
 
-<ng-container *ngIf="loading()">
-  <p>Loading...</p>
+  <ng-container *ngIf="!loading()">
+
+    <div class="flex justify-end w-full">
+      <p-button label="Add Area" severity="primary" (click)="show()"/>
+    </div>
+    
+    <ng-container *ngIf="!loading()">
+      <app-area-table 
+      [areas]="areas()" 
+      (updateColor)="updateAreaColor($event)"
+      (edit)="editArea($event)"
+      (delete)="deleteArea($event)">
+    </app-area-table>
+    
+  </ng-container>
+
 </ng-container>
-
-<ng-container *ngIf="!loading()">
-<app-area-table [areas]="areas()"/>
-</ng-container>
+</div>
