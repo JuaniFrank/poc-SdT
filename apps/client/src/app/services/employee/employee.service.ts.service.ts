@@ -16,16 +16,23 @@ export class EmployeeServiceTsService {
     return this.http.get<Employee[]>(this.baseUrl);
   }
 
+  getAllByStatus(status: 'active' | 'deleted'): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.baseUrl}/status/${status}`);
+  }
+
   getById(id: number): Observable<Employee> {
     return this.http.get<Employee>(`${this.baseUrl}/${id}`);
   }
 
   update(id: number, data: Partial<Employee>): Observable<Employee> {
-    console.log({id, data});
     return this.http.patch<Employee>(`${this.baseUrl}/${id}`, data);
   }
 
-  delete(id: number): Observable<void> {
+  deleteSoft(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/soft/${id}`);
+  }
+
+  deleteHard(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 
