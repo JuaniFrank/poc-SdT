@@ -5,12 +5,15 @@
     <div *ngIf="!loading() && employees().length === 0">No hay empleados disponibles</div>
     
     <div class="employees-container" *ngIf="!loading() && employees().length > 0">
-      <p-card [style]="{ width: '100%', overflow: 'hidden' }" *ngFor="let employee of employees()" [header]="employee.name">
+      <p-card [style]="{ width: '100%', overflow: 'hidden' }" *ngFor="let employee of employees()" [header]="getArea(employee.area_id).title">
         <!-- <ng-template #header>
             <img alt="Card" class="w-full" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
         </ng-template> -->
-        <ng-template #title>{{ employee.name + ' ' + employee.lastName }}</ng-template>
+        <ng-template #title>{{ employee.name + ' ' + employee.lastname }}</ng-template>
         <ng-template #subtitle>{{ employee.email }}</ng-template>
+
+        <app-area-pill class="flex" [title]="getArea(employee.area_id).title" [color]="getArea(employee.area_id).color"></app-area-pill>
+        
         <ng-template #footer>
             <div class="flex gap-4 mt-1">
                 <p-button label="Edit" severity="primary" class="w-full" [outlined]="true" styleClass="w-full" />
