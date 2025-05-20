@@ -19,6 +19,9 @@
       "client:start": {
         "persistent": true,
         "cache": false
+      },
+      "client:build": {
+        "cache": false
       }
     }
   }
