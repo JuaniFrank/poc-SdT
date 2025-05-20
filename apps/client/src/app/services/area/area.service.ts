@@ -24,7 +24,6 @@ export class AreaServiceTsService {
   }
 
   update(id: number, data: Partial<Area>): Observable<Area> {
-    console.log({id, data});
     return this.http.patch<Area>(`${this.baseUrl}/${id}`, data);
   }
 
