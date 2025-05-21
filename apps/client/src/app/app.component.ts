@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { PrimeNG } from 'primeng/config';
+import { AuthService } from './services/auth/auth.service';
 
 @Component({
   standalone: true,
@@ -11,11 +12,11 @@ import { PrimeNG } from 'primeng/config';
 })
 export class AppComponent {
 
-  constructor(private primeng: PrimeNG) {}
 
-    ngOnInit() {
-        this.primeng.ripple.set(true);
-    }
+  
+
+  ngOnInit() {
+  }
 
   title = 'client';
 }
