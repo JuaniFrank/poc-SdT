@@ -1,12 +1,16 @@
 {
     "$schema": "https://turborepo.com/schema.json",
     "tasks": {
-      "build": {
-        "dependsOn": ["^build"],
-        "outputs": [".next/**", "!.next/cache/**"]
+      "client:build": {
+        "dependsOn": ["api:build"],
+        "outputs": ["apps/client**"]
       },
-      "check-types": {
-        "dependsOn": ["^check-types"]
+      "api:build": {
+        "outputs": ["apps/api/**"]
+      },
+      "api:prod": {
+        "cache": false,
+        "outputs": ["apps/api/**"]
       },
       "start:prod": {
         "persistent": true,
@@ -23,6 +27,10 @@
       "client:start": {
         "persistent": true,
         "cache": false
+      },
+      "client:prod": {
+        "cache": false,
+        "outputs": ["apps/client**"]
       }
     }
   }
