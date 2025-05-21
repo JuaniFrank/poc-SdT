@@ -3,12 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "client:start": "ng serve",
-    "build": "ng build",
     "start": "ng serve",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "start:prod": "node dist/client/server/server.mjs"
+    "client:start": "ng serve",
+    "client:build": "ng build",
+    "client:prod": "node dist/apps/client/server/server.mjs",
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {

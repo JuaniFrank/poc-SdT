@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { DASHBOARD_ROUTES } from './dashboard/dashboard.routes';
+import { AUTH_ROUTES } from './auth/auth.routes';
 
 export const routes: Routes = [
   {
@@ -7,7 +8,11 @@ export const routes: Routes = [
     children: DASHBOARD_ROUTES,
   },
   {
+    path: 'auth',
+    children: AUTH_ROUTES,
+  },
+  {
     path: '**',
-    redirectTo: 'dashboard',
+    redirectTo: 'auth/login',
   },
 ];

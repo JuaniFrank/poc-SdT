@@ -35,7 +35,14 @@ export class UserService {
       'INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
       [newUser.username, newUser.email, newUser.password],
     );
-    return result;
+
+    const [rows]: any = await this.db.execute(
+      'SELECT * FROM users WHERE email = ?',
+      [createUserDto.email],
+    );
+    const user = rows[0];
+
+    return user;
   }
 
   async findAll(): Promise<User[]> {

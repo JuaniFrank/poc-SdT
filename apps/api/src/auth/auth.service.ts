@@ -40,8 +40,18 @@ export class AuthService {
     return { token };
   }
 
-  async register(createUserDto: CreateUserDto): Promise<QueryResult> {
+  async register(createUserDto: CreateUserDto): Promise<{token: string}> {
     const user = await this.userService.create(createUserDto);
-    return user as unknown as QueryResult;
+
+    const payload = { sub: user.id, username: user.email };
+    const token = await this.jwtService.signAsync(payload);
+
+    return {token};
+  }
+
+  async validate(token: string) {
+    const payload = await this.jwtService.verifyAsync(token);
+    console.log({payload});
+    return payload;
   }
 }
